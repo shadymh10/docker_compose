@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Easy Notebook</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <h1>My Notebook</h1>
+    <form method="POST" action="{{ url_for('index') }}">
+        <input type="text" name="title" placeholder="Title" required autofocus>
+        <textarea name="content" placeholder="Write your note here..." required rows="5"></textarea>
+        <button type="submit">Add Note</button>
+    </form>
+
+    {% if notes %}
+        {% for note in notes %}
+            <div class="note">
+                <h3>{{ note['title'] }}</h3>
+                <p>{{ note['content'] }}</p>
+                <form class="delete-form" method="POST" action="{{ url_for('delete', note_id=note['id']) }}">
+                    <button type="submit" title="Delete this note">&times;</button>
+                </form>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No notes yet. Add your first note!</p>
+    {% endif %}
+</body>
+</html>
