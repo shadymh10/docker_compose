@@ -1,0 +1,12 @@
+name: star event workflow
+on:
+  watch: # hello docker
+jobs: 
+  job-star-event:
+   name: start docker 
+   runs-on: ubuntu-latest
+   steps:
+    - name: hello
+      run: echo"hello from docker"
+      
+   
